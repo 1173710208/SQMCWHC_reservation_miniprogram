@@ -57,7 +57,7 @@
       },
       {
         "pagePath": "pages/user-center/index",
-        "text": "我",
+        "text": "个人中心",
         "iconPath": "images/icons/usercenter.png",
         "selectedIconPath": "images/icons/usercenter-active.png"
       }

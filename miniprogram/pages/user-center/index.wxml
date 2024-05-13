@@ -3,12 +3,13 @@
   <view class="top_bg" />
   <view class="main_content">
     <view class="userinfo_container">
-      <image class="avatar" src="../../images/icons/avatar.png" bind:tap="getOpenId" mode="widthFix" />
+      <image wx:if="{{ !openId }}" class="avatar" src="../../images/icons/avatar.png" bind:tap="getOpenId" mode="widthFix" />
+      <image wx:else class="avatar" src="../../images/icons/avatar.png" bind:tap="getOpenId" mode="widthFix" />
       <block wx:if="{{ !openId }}">
         <view class="username" bind:tap="getOpenId">请点击登录</view>
       </block>
       <block wx:else>
-        <view class="username">openId: {{ openId }}</view>
+        <view class="username">{{ openId }}</view>
       </block>
     </view>
     <view class="settings_container">

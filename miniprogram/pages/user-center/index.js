@@ -7,33 +7,44 @@ Page({
    */
   data: {
     openId: '',
-    showUploadTip: false,
+    userInfo: {},
   },
 
   getOpenId() {
+    const that = this;
     wx.showLoading({
       title: '',
     });
-    wx.cloud
-      .callFunction({
-        name: 'quickstartFunctions',
+
+    wx.cloud.callFunction({
+        name: 'login',
         data: {
           type: 'getOpenId',
         },
       })
       .then((resp) => {
-        this.setData({
-          haveGetOpenId: true,
+        console.log(resp)
+        that.setData({
           openId: resp.result.openid,
-        });
+          userInfo: resp.result.event.userInfo
+        });        
+        wx.setStorageSync('openId', that.data.openId);
         wx.hideLoading();
       })
       .catch((e) => {
-        this.setData({
+        that.setData({
           showUploadTip: true,
         });
         wx.hideLoading();
       });
+      
+  },
+  
+  onLoad:function(options){
+    const ui= wx.getStorageSync('openId')
+    this.setData({
+     openId:ui.openId
+    })
   },
 
   gotoWxCodePage() {
