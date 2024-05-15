@@ -1,1 +1,20 @@
 /* pages/cloudTest/testIndex.wxss */
+.button{
+  width: 70px;
+  height: 70px;
+  line-height:70px;
+  border-radius:20%;
+  border: none;
+  text-align:center;
+  font-size: 25px;
+  color:#FFFFFF;
+  font-weight:bold;
+  margin-top:50px;
+}
+.right{
+  background:#EA5149;
+  float: right;
+}
+.left{
+  background:#feb600;
+ }

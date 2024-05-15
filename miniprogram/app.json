@@ -1,20 +1,9 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/goods-list/index",
-    "pages/examples/index",
-    "pages/user-center/index",
-    "pages/exampleDetail/index",
-    "pages/deployService/index",
-    "pages/updateRecord/index",
-    "pages/updateRecordResult/index",
-    "pages/updateRecordSuccess/index",
-    "pages/sumRecord/index",
-    "pages/sumRecordResult/index",
-    "pages/web/index",
-    "pages/myself/myself",
+    "pages/gongxun/gongxun",
     "pages/cloudTest/testIndex",
-    "pages/cloudTest/testLog"
+    "pages/cloudTest/testLog",
+    "pages/user-center/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -32,14 +21,8 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "快速开始",
-        "iconPath": "images/icons/home.png",
-        "selectedIconPath": "images/icons/home-active.png"
-      },
-      {
-        "pagePath": "pages/examples/index",
-        "text": "云开发示例",
+        "pagePath": "pages/gongxun/gongxun",
+        "text": "功训预约",
         "iconPath": "images/icons/examples.png",
         "selectedIconPath": "images/icons/examples-active.png"
       },

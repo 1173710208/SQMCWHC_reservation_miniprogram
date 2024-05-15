@@ -1,0 +1,125 @@
+<!--pages/gongxun/gongxun.wxml-->
+<view class="dropdown-container">
+  <button class="dropdown-button" bindtap="toggleDropdown">{{selectedItem}}</button>
+  <view class="dropdown-menu" wx:if="{{dropdownVisible}}">
+    <block wx:for="{{items}}" wx:key="index">
+      <view class="dropdown-item" bindtap="selectItem" data-index="{{index}}">{{item}}</view>
+    </block>
+  </view>
+</view>
+
+<view class="schedule-container">
+  <view class="schedule-header">
+    <text>功训预约单</text>
+  <view class="export-btn" bindinput="exportList">导出预约单</view>
+  </view>
+  <view class="schedule-table">
+    <view class="row header-row">
+      <view class="cell time-cell"></view>
+      <view class="cell">一</view>
+      <view class="cell">二</view>
+      <view class="cell">三</view>
+      <view class="cell">四</view>
+      <view class="cell">五</view>
+      <view class="cell">六</view>
+    </view>
+    <view class="row">
+      <view class="cell time-cell">8:10</view>
+      <view class="cell" id="gxtc1-1" bindtap="reserveGx">一二三 </view>
+      <view class="cell" id="gxtc1-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc1-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc1-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc1-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc1-6" bindtap="reserveGx">{{item.sat}}</view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">8:50</view>
+      <view class="cell" id="gxtc2-1" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc2-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc2-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc2-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc2-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc2-6" bindtap="reserveGx">{{item.sat}}</view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">9:30</view>
+      <view class="cell" id="gxtc3-1" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc3-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc3-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc3-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc3-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc3-6" bindtap="reserveGx">{{item.sat}}</view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">10:10</view>
+      <view class="cell" id="gxtc4-1" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc4-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc4-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc4-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc4-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc4-6" bindtap="reserveGx">{{item.sat}}</view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">10:50</view>
+      <view class="cell" id="gxtc5-1" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc5-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc5-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc5-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc5-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc5-6" bindtap="reserveGx">{{item.sat}}</view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">11:30</view>
+      <view class="cell" id="gxtc6-1" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc6-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc6-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc6-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc6-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc6-6" bindtap="reserveGx">{{item.sat}}</view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">2:40</view>
+      <view class="cell" id="gxtc7-1" bindtap="reserveGx">一二三四</view>
+      <view class="cell" id="gxtc7-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc7-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc7-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc7-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc7-6" style="background-color: #e9e9e9;"></view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">3:20</view>
+      <view class="cell" id="gxtc8-1" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc8-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc8-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc8-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc8-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc8-6" style="background-color: #e9e9e9;"></view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">4:00</view>
+      <view class="cell" id="gxtc9-1" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc9-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc9-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc9-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc9-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc9-6" style="background-color: #e9e9e9;"></view>
+    </view> 
+    <view class="row">
+      <view class="cell time-cell">4:40</view>
+      <view class="cell" id="gxtc10-1" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc10-2" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc10-3" bindtap="reserveGx">一二三}</view>
+      <view class="cell" id="gxtc10-4" bindtap="reserveGx">一二三</view>
+      <view class="cell" id="gxtc10-5" bindtap="reserveGx">{{item.fri}}</view>
+      <view class="cell" id="gxtc10-6" style="background-color: #e9e9e9;"></view>
+    </view> 
+
+  </view>
+</view>
+
+<view wx:if="{{showInputBox}}" class="input-container">
+      <input type="text" placeholder="输入名字" bindinput="onInput"/>
+      <button bindtap="submitInput" class="reverse-btn">提交预约</button>
+</view>
+
+

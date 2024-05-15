@@ -1,2 +1,4 @@
 <!--pages/cloudTest/testLog.wxml-->
-<text>pages/cloudTest/testLog.wxml</text>
+<block wx:for="{{logs}}" wx:key="key">
+  <view class="log-item">日期:{{item.date}}分数:{{item.add}}</view>
+</block>
