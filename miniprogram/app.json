@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/gongxun/gongxun",
+    "pages/qiangci/qiangci",
     "pages/cloudTest/testIndex",
     "pages/cloudTest/testLog",
     "pages/user-center/index"
@@ -23,6 +24,12 @@
       {
         "pagePath": "pages/gongxun/gongxun",
         "text": "功训预约",
+        "iconPath": "images/icons/examples.png",
+        "selectedIconPath": "images/icons/examples-active.png"
+      },
+      {
+        "pagePath": "pages/qiangci/qiangci",
+        "text": "强磁预约",
         "iconPath": "images/icons/examples.png",
         "selectedIconPath": "images/icons/examples-active.png"
       },
