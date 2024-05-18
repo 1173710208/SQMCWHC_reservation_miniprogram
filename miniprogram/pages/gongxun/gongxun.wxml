@@ -25,92 +25,92 @@
     </view>
     <view class="row">
       <view class="cell time-cell">8:10</view>
-      <view class="cell" id="gxtc01-1" bindtap="reserveGx"> </view>
-      <view class="cell" id="gxtc01-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc01-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc01-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc01-5" bindtap="reserveGx">{{item.fri}}</view>
-      <view class="cell" id="gxtc01-6" bindtap="reserveGx">{{item.sat}}</view>
+      <view class="cell" id="gxtc01-1" bindtap="reserveGx">{{timeSlots[0][0].name}}</view>
+      <view class="cell" id="gxtc01-2" bindtap="reserveGx">{{timeSlots[0][1].name}}</view>
+      <view class="cell" id="gxtc01-3" bindtap="reserveGx">{{timeSlots[0][2].name}}</view>
+      <view class="cell" id="gxtc01-4" bindtap="reserveGx">{{timeSlots[0][3].name}}</view>
+      <view class="cell" id="gxtc01-5" bindtap="reserveGx">{{timeSlots[0][4].name}}</view>
+      <view class="cell" id="gxtc01-6" bindtap="reserveGx">{{timeSlots[0][5].name}}</view>
     </view> 
     <view class="row">
       <view class="cell time-cell">8:50</view>
-      <view class="cell" id="gxtc02-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc02-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc02-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc02-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc02-5" bindtap="reserveGx">{{item.fri}}</view>
-      <view class="cell" id="gxtc02-6" bindtap="reserveGx">{{item.sat}}</view>
+      <view class="cell" id="gxtc02-1" bindtap="reserveGx">{{timeSlots[1][0].name}}</view>
+      <view class="cell" id="gxtc02-2" bindtap="reserveGx">{{timeSlots[1][1].name}}</view>
+      <view class="cell" id="gxtc02-3" bindtap="reserveGx">{{timeSlots[1][2].name}}</view>
+      <view class="cell" id="gxtc02-4" bindtap="reserveGx">{{timeSlots[1][3].name}}</view>
+      <view class="cell" id="gxtc02-5" bindtap="reserveGx">{{timeSlots[1][4].name}}</view>
+      <view class="cell" id="gxtc02-6" bindtap="reserveGx">{{timeSlots[1][5].name}}</view>
     </view> 
     <view class="row">
       <view class="cell time-cell">9:30</view>
-      <view class="cell" id="gxtc03-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc03-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc03-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc03-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc03-5" bindtap="reserveGx">{{item.fri}}</view>
-      <view class="cell" id="gxtc03-6" bindtap="reserveGx">{{item.sat}}</view>
+      <view class="cell" id="gxtc03-1" bindtap="reserveGx">{{timeSlots[2][0].name}}</view>
+      <view class="cell" id="gxtc03-2" bindtap="reserveGx">{{timeSlots[2][1].name}}</view>
+      <view class="cell" id="gxtc03-3" bindtap="reserveGx">{{timeSlots[2][2].name}}</view>
+      <view class="cell" id="gxtc03-4" bindtap="reserveGx">{{timeSlots[2][3].name}}</view>
+      <view class="cell" id="gxtc03-5" bindtap="reserveGx">{{timeSlots[2][4].name}}</view>
+      <view class="cell" id="gxtc03-6" bindtap="reserveGx">{{timeSlots[2][5].name}}</view>
     </view> 
     <view class="row">
       <view class="cell time-cell">10:10</view>
-      <view class="cell" id="gxtc04-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc04-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc04-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc04-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc04-5" bindtap="reserveGx">{{item.fri}}</view>
-      <view class="cell" id="gxtc04-6" bindtap="reserveGx">{{item.sat}}</view>
+      <view class="cell" id="gxtc04-1" bindtap="reserveGx">{{timeSlots[3][0].name}}</view>
+      <view class="cell" id="gxtc04-2" bindtap="reserveGx">{{timeSlots[3][1].name}}</view>
+      <view class="cell" id="gxtc04-3" bindtap="reserveGx">{{timeSlots[3][2].name}}</view>
+      <view class="cell" id="gxtc04-4" bindtap="reserveGx">{{timeSlots[3][3].name}}</view>
+      <view class="cell" id="gxtc04-5" bindtap="reserveGx">{{timeSlots[3][4].name}}</view>
+      <view class="cell" id="gxtc04-6" bindtap="reserveGx">{{timeSlots[3][5].name}}</view>
     </view> 
     <view class="row">
       <view class="cell time-cell">10:50</view>
-      <view class="cell" id="gxtc05-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc05-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc05-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc05-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc05-5" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc05-6" bindtap="reserveGx"></view>
+      <view class="cell" id="gxtc05-1" bindtap="reserveGx">{{timeSlots[4][0].name}}</view>
+      <view class="cell" id="gxtc05-2" bindtap="reserveGx">{{timeSlots[4][1].name}}</view>
+      <view class="cell" id="gxtc05-3" bindtap="reserveGx">{{timeSlots[4][2].name}}</view>
+      <view class="cell" id="gxtc05-4" bindtap="reserveGx">{{timeSlots[4][3].name}}</view>
+      <view class="cell" id="gxtc05-5" bindtap="reserveGx">{{timeSlots[4][4].name}}</view>
+      <view class="cell" id="gxtc05-6" bindtap="reserveGx">{{timeSlots[4][5].name}}</view>
     </view> 
     <view class="row">
       <view class="cell time-cell">11:30</view>
-      <view class="cell" id="gxtc06-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc06-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc06-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc06-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc06-5" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc06-6" bindtap="reserveGx"></view>
+      <view class="cell" id="gxtc06-1" bindtap="reserveGx">{{timeSlots[5][0].name}}</view>
+      <view class="cell" id="gxtc06-2" bindtap="reserveGx">{{timeSlots[5][1].name}}</view>
+      <view class="cell" id="gxtc06-3" bindtap="reserveGx">{{timeSlots[5][2].name}}</view>
+      <view class="cell" id="gxtc06-4" bindtap="reserveGx">{{timeSlots[5][3].name}}</view>
+      <view class="cell" id="gxtc06-5" bindtap="reserveGx">{{timeSlots[5][4].name}}</view>
+      <view class="cell" id="gxtc06-6" bindtap="reserveGx">{{timeSlots[5][5].name}}</view>
     </view> 
     <view class="row">
       <view class="cell time-cell">2:40</view>
-      <view class="cell" id="gxtc07-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc07-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc07-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc07-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc07-5" bindtap="reserveGx"></view>
+      <view class="cell" id="gxtc07-1" bindtap="reserveGx">{{timeSlots[6][0].name}}</view>
+      <view class="cell" id="gxtc07-2" bindtap="reserveGx">{{timeSlots[6][1].name}}</view>
+      <view class="cell" id="gxtc07-3" bindtap="reserveGx">{{timeSlots[6][2].name}}</view>
+      <view class="cell" id="gxtc07-4" bindtap="reserveGx">{{timeSlots[6][3].name}}</view>
+      <view class="cell" id="gxtc07-5" bindtap="reserveGx">{{timeSlots[6][4].name}}</view>
       <view class="cell" id="gxtc07-6" style="background-color: #e9e9e9;"></view>
     </view> 
     <view class="row">
       <view class="cell time-cell">3:20</view>
-      <view class="cell" id="gxtc08-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc08-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc08-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc08-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc08-5" bindtap="reserveGx"></view>
+      <view class="cell" id="gxtc08-1" bindtap="reserveGx">{{timeSlots[7][0].name}}</view>
+      <view class="cell" id="gxtc08-2" bindtap="reserveGx">{{timeSlots[7][1].name}}</view>
+      <view class="cell" id="gxtc08-3" bindtap="reserveGx">{{timeSlots[7][2].name}}</view>
+      <view class="cell" id="gxtc08-4" bindtap="reserveGx">{{timeSlots[7][3].name}}</view>
+      <view class="cell" id="gxtc08-5" bindtap="reserveGx">{{timeSlots[7][4].name}}</view>
       <view class="cell" id="gxtc08-6" style="background-color: #e9e9e9;"></view>
     </view> 
     <view class="row">
       <view class="cell time-cell">4:00</view>
-      <view class="cell" id="gxtc09-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc09-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc09-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc09-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc09-5" bindtap="reserveGx"></view>
+      <view class="cell" id="gxtc09-1" bindtap="reserveGx">{{timeSlots[8][0].name}}</view>
+      <view class="cell" id="gxtc09-2" bindtap="reserveGx">{{timeSlots[8][1].name}}</view>
+      <view class="cell" id="gxtc09-3" bindtap="reserveGx">{{timeSlots[8][2].name}}</view>
+      <view class="cell" id="gxtc09-4" bindtap="reserveGx">{{timeSlots[8][3].name}}</view>
+      <view class="cell" id="gxtc09-5" bindtap="reserveGx">{{timeSlots[8][4].name}}</view>
       <view class="cell" id="gxtc09-6" style="background-color: #e9e9e9;"></view>
     </view> 
     <view class="row">
       <view class="cell time-cell">4:40</view>
-      <view class="cell" id="gxtc10-1" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc10-2" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc10-3" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc10-4" bindtap="reserveGx"></view>
-      <view class="cell" id="gxtc10-5" bindtap="reserveGx"></view>
+      <view class="cell" id="gxtc10-1" bindtap="reserveGx">{{timeSlots[9][0].name}}</view>
+      <view class="cell" id="gxtc10-2" bindtap="reserveGx">{{timeSlots[9][1].name}}</view>
+      <view class="cell" id="gxtc10-3" bindtap="reserveGx">{{timeSlots[9][2].name}}</view>
+      <view class="cell" id="gxtc10-4" bindtap="reserveGx">{{timeSlots[9][3].name}}</view>
+      <view class="cell" id="gxtc10-5" bindtap="reserveGx">{{timeSlots[9][4].name}}</view>
       <view class="cell" id="gxtc10-6" style="background-color: #e9e9e9;"></view>
     </view> 
 

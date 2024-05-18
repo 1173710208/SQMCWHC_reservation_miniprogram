@@ -9,7 +9,49 @@ Page({
     times: ['8:10','8:50','9:30','10:10','10:50','11:30','2:40','3:20','4:00','4:40'],
     selectedWeekday:'',
     weekdays: ['星期一','星期二','星期三','星期四','星期五','星期六'],
-    showInputBox: false
+    showInputBox: false,
+    logs: [],
+    logsLength: '',
+    timeSlots: []
+  },
+
+  showReservations(){
+    const that = this;
+    const doctor = this.data.selectedDoctor;
+    const myDate = new Date();
+    const year = myDate.getFullYear();
+    const month = myDate.getMonth()+1;
+    const weekstartday = myDate.getDate()-myDate.getDay()+1;
+    console.log(year,weekstartday)
+    wx.cloud.callFunction({
+      name: "gxread",
+      data:{doctor, year, month, weekstartday},
+      success:res=>{
+        //console.log(res);
+        that.setData({
+          logs:res.result.data,
+          logsLength:res.result.data.length,
+          timeSlots: []
+        })
+        console.log(that.data.logs)
+        console.log(res.result.data.length)
+        let slot_arr = Array.from(new Array(that.data.times.length), () => new Array(that.data.weekdays.length))
+        for (let i = 0; i < that.data.logsLength; i++) {
+          let slotId = that.data.logs[i].plot;
+          // Get the 5th & 6th character of the slot id to determine tine and the day of week
+          let selectedTimeIndex = parseInt(slotId.substring(4, 6),10)-1;
+          let selectedWeekdayIndex = parseInt(slotId.substring(7, 8),10)-1;
+          console.log(selectedTimeIndex, selectedWeekdayIndex)
+          slot_arr[selectedTimeIndex][selectedWeekdayIndex]=that.data.logs[i];
+        }
+        console.log(slot_arr)
+        that.setData({
+          timeSlots: slot_arr
+        })
+        console.log(that.data.timeSlots)
+      },
+      fail:res =>{console.log("res", res)}
+    })
   },
 
   toggleDropdown: function() {
@@ -25,6 +67,7 @@ Page({
       selectedDoctor: this.data.doctors[index],
       dropdownVisible: false
     });
+    this.showReservations();
   },
 
   reserveGx: function(e) {
@@ -103,5 +146,10 @@ Page({
 
   exportList(){
 
+  },
+
+  
+  onShow:function(){
+    this.showReservations();
   }
 })
