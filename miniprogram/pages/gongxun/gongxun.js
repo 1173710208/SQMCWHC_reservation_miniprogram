@@ -18,37 +18,40 @@ Page({
   showReservations(){
     const that = this;
     const doctor = this.data.selectedDoctor;
-    const myDate = new Date();
-    const year = myDate.getFullYear();
-    const month = myDate.getMonth()+1;
-    const weekstartday = myDate.getDate()-myDate.getDay()+1;
-    console.log(year,weekstartday)
+
+    // Get current date  
+    const currentDate = new Date();
+    // Get current week day, Sunday is 0
+    const currentDay = currentDate.getDay();
+    // Calculate the date of the previous Sunday
+    const previousSunday = new Date(currentDate);
+    previousSunday.setDate(currentDate.getDate() - currentDay);
+    // Format date as YYYY-MM-DD
+    const year = previousSunday.getFullYear();
+    const month = ('0' + (previousSunday.getMonth() + 1)).slice(-2); // 月份是从0开始的，需要加1
+    const day = ('0' + previousSunday.getDate()).slice(-2);
+    const weekIdentifier = year+month+day;
+
     wx.cloud.callFunction({
       name: "gxread",
-      data:{doctor, year, month, weekstartday},
+      data:{doctor, weekIdentifier},
       success:res=>{
-        //console.log(res);
         that.setData({
           logs:res.result.data,
           logsLength:res.result.data.length,
           timeSlots: []
         })
-        console.log(that.data.logs)
-        console.log(res.result.data.length)
         let slot_arr = Array.from(new Array(that.data.times.length), () => new Array(that.data.weekdays.length))
         for (let i = 0; i < that.data.logsLength; i++) {
           let slotId = that.data.logs[i].plot;
           // Get the 5th & 6th character of the slot id to determine tine and the day of week
           let selectedTimeIndex = parseInt(slotId.substring(4, 6),10)-1;
           let selectedWeekdayIndex = parseInt(slotId.substring(7, 8),10)-1;
-          console.log(selectedTimeIndex, selectedWeekdayIndex)
           slot_arr[selectedTimeIndex][selectedWeekdayIndex]=that.data.logs[i];
         }
-        console.log(slot_arr)
         that.setData({
           timeSlots: slot_arr
         })
-        console.log(that.data.timeSlots)
       },
       fail:res =>{console.log("res", res)}
     })
@@ -61,7 +64,6 @@ Page({
   },
 
   selectItem: function(e) {
-    //console.log(e);
     const index = e.currentTarget.dataset.index;
     this.setData({
       selectedDoctor: this.data.doctors[index],
@@ -71,12 +73,10 @@ Page({
   },
 
   reserveGx: function(e) {
-    console.log(e);
     const slotId = e.currentTarget.id;
     // Get the 5th & 6th character of the slot id to determine tine and the day of week
     const selectedTimeIndex = parseInt(slotId.substring(4, 6),10)-1;
     const selectedWeekdayIndex = parseInt(slotId.substring(7, 8),10)-1;
-    //console.log(selectedTimeIndex); 
 
     this.setData({
       selectedSlot: slotId,
@@ -84,50 +84,54 @@ Page({
       selectedWeekday: selectedWeekdayIndex,
       showInputBox: true
     });
-    //console.log(this.data.selectedSlot); 
-    //console.log(this.data.selectedTime); 
-    //console.log(this.data.selectedWeekday); 
-
   },
 
   formSubmit(e) {
-    //console.log(e.detail.value);
     const { name, tel } = e.detail.value
 
-    if (!name || !tel ) {
+    if (!name  ) {
       wx.showToast({
-        title: '请输入姓名和手机号！',
+        title: '请输入姓名！',
         icon: 'error'
       })
       return
     }
+    if(!tel){
+      wx.showToast({
+        title: '请输入手机号！',
+        icon: 'error'
+      })
+      return
+    }
+
     const doctor = this.data.selectedDoctor;
     const plot = this.data.selectedSlot;
-    const myDate = new Date();
-    const year = myDate.getFullYear();
-    const month = myDate.getMonth()+1;
-    const weekstartday = myDate.getDate()-myDate.getDay()+1;
-    const submitdate = myDate.getDate()
-    //console.log(name, tel, doctor, plot, year, month, weekstartday, submitdate)
 
+    // Get current date  
+    const currentDate = new Date();
+    // Get current week day, Sunday is 0
+    const currentDay = currentDate.getDay();
+    // Calculate the date of the previous Sunday
+    const previousSunday = new Date(currentDate);
+    previousSunday.setDate(currentDate.getDate() - currentDay);
+    // Format date as YYYY-MM-DD
+    const year = previousSunday.getFullYear();
+    const month = ('0' + (previousSunday.getMonth() + 1)).slice(-2); // 月份是从0开始的，需要加1
+    const day = ('0' + previousSunday.getDate()).slice(-2);
+    const previousSundayFormatted = year+month+day;
+    
     wx.cloud.callFunction({
       name: 'gxinsert',
-      data: { name, tel, doctor, plot, year, month, weekstartday, submitdate},
+      data: { name, tel, doctor, plot, previousSundayFormatted, currentDate},
       success: res => {
-        if (res.result.success) {
-          wx.showToast({
-            title: '预约成功',
-            icon: 'success'
-          })
-        } else {
-          wx.showToast({
-            title: '提交失败: ' + res.result.error,
-            icon: 'error'
-          })
-        }        
+        wx.showToast({
+          title: '预约成功',
+          icon: 'success'
+        })
         this.setData({
           showInputBox: false
         });
+        this.showReservations()
       },
       fail: err => {
         wx.showToast({
@@ -147,7 +151,6 @@ Page({
   exportList(){
 
   },
-
   
   onShow:function(){
     this.showReservations();

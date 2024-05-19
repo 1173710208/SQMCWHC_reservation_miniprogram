@@ -7,9 +7,7 @@ exports.main =async(event,context)=>{
   try{
     return await db.collection('gongxun').where({
       doctor: event.doctor,
-      month: event.month,
-      year: event.year,
-      weekstartday: event.weekstartday
+      weekIdentifier: event.weekIdentifier
     }).get()
   }catch(e){
     console.log(e)

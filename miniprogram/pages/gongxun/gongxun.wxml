@@ -119,8 +119,7 @@
 
 <view wx:if="{{showInputBox}}" class="input-container">
 <view class="input-info">
-  <view>您已选择</view>
-  <view>{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{selectedDoctor}}医生</view>
+  <view>{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{selectedDoctor}}</view>
 </view>
   <form bindsubmit="formSubmit">
     <input type="text" placeholder="输入名字" id="name" name="name"/>
