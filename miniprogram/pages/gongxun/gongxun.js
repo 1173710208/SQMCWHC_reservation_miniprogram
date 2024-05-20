@@ -155,7 +155,18 @@ Page({
           wx.cloud.callFunction({
             name: 'gxinsert',
             data: { name, tel, doctor, plot, previousSundayFormatted, currentDate},
-            success: res => {
+            success: res => { 
+              if(i==this.data.weekdays.length-1){
+                this.showReservations();
+                wx.hideLoading();
+                this.setData({
+                  showInputBox: false
+                });  
+                wx.showToast({
+                  title: '预约成功',
+                  icon: 'success'
+                })
+              }
             },
             fail: err => {
               wx.showToast({
@@ -164,17 +175,6 @@ Page({
               })
             }
           })
-        }
-        if(i==this.data.weekdays.length-1){
-          wx.hideLoading();
-          this.setData({
-            showInputBox: false
-          });  
-          wx.showToast({
-            title: '预约成功',
-            icon: 'success'
-          })
-          this.showReservations();
         }
       }  
     }else{           
