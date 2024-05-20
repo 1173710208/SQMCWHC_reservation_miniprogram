@@ -44,7 +44,7 @@ Page({
           logsLength:res.result.data.length,
           timeplots: []
         })
-        console.log(that.data.logs)
+        //console.log(that.data.logs)
         Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
         let plot_arr = Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
         for (let i = that.data.logsLength-1; i >= 0 ; i--) {
@@ -247,7 +247,7 @@ Page({
   exportList(){
 
   },
-  
+
   onShow:function(){
     this.showReservations();
   }

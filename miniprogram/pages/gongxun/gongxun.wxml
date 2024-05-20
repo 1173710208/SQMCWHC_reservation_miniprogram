@@ -11,7 +11,7 @@
 <view class="schedule-container">
   <view class="schedule-header">
     <text>功训预约单</text>
-  <view class="export-btn" bindinput="exportList">导出预约单</view>
+  <!-- <view class="export-btn" bindinput="exportList">导出预约单</view> -->
   </view>
   <view class="schedule-table">
     <view class="row header-row">
