@@ -1,5 +1,0 @@
-<!--pages/cloudTest/testIndex.wxml-->
-<view class="container">
-  <view class="right button" bind:tap="addLog" data-add="1">+1</view>
-  <view class="left button" bind:tap="addLog" data-add="-1">-1</view>
-</view>

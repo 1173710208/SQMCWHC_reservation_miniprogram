@@ -13,24 +13,9 @@
       </block>
     </view>
     <view class="settings_container">
-      <!-- <view class="setting_item">
-        <view class="left">
-          <image class="setting_icon" src="../../images/icons/setting.svg" />
-          <view class="setting_text">个人信息设置</view>
-        </view>
-        <image class="arrow_icon" src="../../images/arrow.svg" />
-      </view> -->
-      <!-- <view class="setting_item">
-        <view class="left">
-          <image class="setting_icon" src="../../images/icons/question.svg" />
-          <view class="setting_text">常见问题</view>
-        </view>
-        <image class="arrow_icon" src="../../images/arrow.svg" />
-      </view> -->
       <view class="setting_item">
         <view class="left">
           <image class="setting_icon" src="../../images/icons/customer-service.svg" />
-          <!-- <view class="setting_text">联系客服</view> -->
           <button open-type="contact" class="contact-button">
             联系客服
           </button>
