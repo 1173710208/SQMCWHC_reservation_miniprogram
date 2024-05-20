@@ -167,6 +167,13 @@ input {
   margin-bottom: 10px;
 }
 
+.cancelBook-btn {
+  border: 1px solid #333;
+  background-color: #c55300;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
 .cancel-btn {
   border: 1px solid #333;
   border-radius: 5px;
@@ -182,4 +189,13 @@ input {
   background-color: #00c553;
   padding: 5px;
   border-radius: 5px;
+}
+
+.h_center {
+  display: flex;
+  justify-content: center;
+}
+
+.margin_10v{
+  margin: 10% 0;
 }

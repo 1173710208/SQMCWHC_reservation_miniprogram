@@ -30,8 +30,7 @@
         <block wx:for="{{rownum}}" wx:for-item="colnum" wx:key="index" wx:for-index="childIndex">
           <view wx:if="{{parentIndex > 5 && childIndex==5}}" class="disabled-cell"  id="{{parentIndex}}-{{childIndex}}" ></view>
           <view wx:elif="{{colnum === 0}}" class="cell"  id="{{parentIndex}}-{{childIndex}}"  bindtap="reserveGx"></view>
-          <view wx:else class="occupied-cell"  id="{{parentIndex}}-{{childIndex}}" >{{colnum.name}}</view>
-          <!-- <view class="{{ colnum ? 'occupied-cell' : 'cell' }} {{(parentIndex > 5 && childIndex == 5) ? 'disabled-cell':''}}" id="{{parentIndex}}-{{childIndex}}" bindtap="reserveGx">{{colnum.name}}</view> -->
+          <view wx:else class="occupied-cell"  id="{{parentIndex}}-{{childIndex}}"  bindtap="bookedGx">{{colnum.name}}</view>
         </block>
       </view>
     </block>
@@ -50,6 +49,16 @@
   </form>
 </view>
 
-
+<view wx:if="{{showBookedBox}}" class="input-container">
+<view class="input-info">
+  <view class="h_center">{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{selectedDoctor}}</view>
+  <view class="h_center margin_10v">{{timeSlots[selectedTime][selectedWeekday].name}}</view>
+  <view class="h_center margin_10v">{{timeSlots[selectedTime][selectedWeekday].tel}}</view>
+</view>
+  <form bindsubmit="cancelReservation">
+    <button formType="submit" class="cancelBook-btn">取消预约</button>
+    <button class="cancel-btn" bind:tap="cancelSubmit">取消</button>
+  </form>
+</view>
 
 
