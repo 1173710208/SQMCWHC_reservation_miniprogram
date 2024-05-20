@@ -1,4 +1,6 @@
 // pages/gongxun/gongxun.js
+const utils = require('../../utils/utils.js');
+
 Page({
   data: {
     dropdownVisible: false,
@@ -41,17 +43,18 @@ Page({
           logsLength:res.result.data.length,
           timeSlots: []
         })
-        let slot_arr = Array.from(new Array(that.data.times.length), () => new Array(that.data.weekdays.length))
+        Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
+        let slot_arr = Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
         for (let i = 0; i < that.data.logsLength; i++) {
           let slotId = that.data.logs[i].plot;
-          // Get the 5th & 6th character of the slot id to determine tine and the day of week
-          let selectedTimeIndex = parseInt(slotId.substring(4, 6),10)-1;
-          let selectedWeekdayIndex = parseInt(slotId.substring(7, 8),10)-1;
-          slot_arr[selectedTimeIndex][selectedWeekdayIndex]=that.data.logs[i];
+          let result = utils.extractStrings(slotId);
+          //console.log(result)
+          slot_arr[result.before][result.after]=that.data.logs[i];
         }
         that.setData({
           timeSlots: slot_arr
         })
+        console.log(that.data.timeSlots)
       },
       fail:res =>{console.log("res", res)}
     })
@@ -75,13 +78,12 @@ Page({
   reserveGx: function(e) {
     const slotId = e.currentTarget.id;
     // Get the 5th & 6th character of the slot id to determine tine and the day of week
-    const selectedTimeIndex = parseInt(slotId.substring(4, 6),10)-1;
-    const selectedWeekdayIndex = parseInt(slotId.substring(7, 8),10)-1;
-
+    let result = utils.extractStrings(slotId);
+    //console.log(result)
     this.setData({
       selectedSlot: slotId,
-      selectedTime: selectedTimeIndex,
-      selectedWeekday: selectedWeekdayIndex,
+      selectedTime: result.before,
+      selectedWeekday: result.after,
       showInputBox: true
     });
   },
