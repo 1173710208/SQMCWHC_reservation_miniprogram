@@ -24,7 +24,7 @@
       <view class="cell">六</view>
     </view>
     <!-- Rendering multiple lines using wx:for loop -->
-    <block wx:for="{{timeSlots}}" wx:for-item="rownum" wx:key="index" wx:for-index="parentIndex">
+    <block wx:for="{{timeplots}}" wx:for-item="rownum" wx:key="index" wx:for-index="parentIndex">
       <view class="row">
         <view class="cell time-cell">{{times[parentIndex]}}</view>
         <block wx:for="{{rownum}}" wx:for-item="colnum" wx:key="index" wx:for-index="childIndex">
@@ -52,8 +52,8 @@
 <view wx:if="{{showBookedBox}}" class="input-container">
 <view class="input-info">
   <view class="h_center">{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{selectedDoctor}}</view>
-  <view class="h_center margin_10v">{{timeSlots[selectedTime][selectedWeekday].name}}</view>
-  <view class="h_center margin_10v">{{timeSlots[selectedTime][selectedWeekday].tel}}</view>
+  <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].name}}</view>
+  <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].tel}}</view>
 </view>
   <form bindsubmit="cancelReservation">
     <button formType="submit" class="cancelBook-btn">取消预约</button>

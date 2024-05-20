@@ -6,7 +6,7 @@ Page({
     dropdownVisible: false,
     selectedDoctor: '邢亚敏',
     doctors: ['邢亚敏','王圆圆', '李亚楠', '陈丹','陈娜','杨慧','曹文','赵艳','马敏','高舒','李从军'],
-    selectedSlot:'',
+    selectedplot:'',
     selectedTime:'',
     times: ['8:10','8:50','9:30','10:10','10:50','11:30','2:40','3:20','4:00','4:40'],
     selectedWeekday:'',
@@ -15,7 +15,7 @@ Page({
     showBookedBox: false,
     logs: [],
     logsLength: '',
-    timeSlots: []
+    timeplots: []
   },
 
   showReservations(){
@@ -42,20 +42,21 @@ Page({
         that.setData({
           logs:res.result.data,
           logsLength:res.result.data.length,
-          timeSlots: []
+          timeplots: []
         })
+        console.log(that.data.logs)
         Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
-        let slot_arr = Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
-        for (let i = 0; i < that.data.logsLength; i++) {
-          let slotId = that.data.logs[i].plot;
-          let result = utils.extractStrings(slotId);
+        let plot_arr = Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
+        for (let i = that.data.logsLength-1; i >= 0 ; i--) {
+          let plotId = that.data.logs[i].plot;
+          let result = utils.extractStrings(plotId);
           //console.log(result)
-          slot_arr[result.before][result.after]=that.data.logs[i];
+          plot_arr[result.before][result.after]=that.data.logs[i];
         }
         that.setData({
-          timeSlots: slot_arr
+          timeplots: plot_arr
         })
-        //console.log(that.data.timeSlots)
+        //console.log(that.data.timeplots)
       },
       fail:res =>{console.log("res", res)}
     })
@@ -77,11 +78,11 @@ Page({
   },
 
   reserveGx: function(e) {
-    const slotId = e.currentTarget.id;
-    let result = utils.extractStrings(slotId);
+    const plotId = e.currentTarget.id;
+    let result = utils.extractStrings(plotId);
     //console.log(result)
     this.setData({
-      selectedSlot: slotId,
+      selectedplot: plotId,
       selectedTime: result.before,
       selectedWeekday: result.after,
       showInputBox: true
@@ -89,11 +90,11 @@ Page({
   },
 
   bookedGx: function(e) {
-    const slotId = e.currentTarget.id;
-    let result = utils.extractStrings(slotId);
+    const plotId = e.currentTarget.id;
+    let result = utils.extractStrings(plotId);
     //console.log(result)
     this.setData({
-      selectedSlot: slotId,
+      selectedplot: plotId,
       selectedTime: result.before,
       selectedWeekday: result.after,
       showBookedBox: true
@@ -117,6 +118,14 @@ Page({
       })
       return
     }
+    if(!utils.isNumeric(tel)){
+      
+      wx.showToast({
+        title: '手机号格式错误',
+        icon: 'error'
+      })
+      return
+    }
 
     wx.showLoading({
       title: '预约中...',
@@ -124,7 +133,7 @@ Page({
     });
 
     const doctor = this.data.selectedDoctor;
-    const plot = this.data.selectedSlot;
+    const plot = this.data.selectedplot;
 
     // Get current date  
     const currentDate = new Date();
@@ -190,7 +199,7 @@ Page({
     });
 
     const doctor = this.data.selectedDoctor;
-    const plot = this.data.selectedSlot;
+    const plot = this.data.selectedplot;
 
     // Get current date  
     const currentDate = new Date();

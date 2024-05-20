@@ -11,6 +11,13 @@ function extractStrings(str) {
   }
 }
 
+// Function to verify that a string is all numeric
+function isNumeric(str) {
+  const regex = /^[0-9]+$/;
+  return regex.test(str);
+}
+
 module.exports = {
-  extractStrings
+  extractStrings,
+  isNumeric
 };
