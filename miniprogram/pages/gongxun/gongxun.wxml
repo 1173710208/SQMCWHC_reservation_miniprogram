@@ -44,6 +44,10 @@
   <form bindsubmit="formSubmit">
     <input type="text" placeholder="输入名字" id="name" name="name"/>
     <input type="text" placeholder="输入手机号" id="tel" name="tel"/>
+    <radio-group name="radioValue" bindchange="radioChange" style="margin-bottom: 10%;">
+        <radio value="1" checked="true" style="margin-bottom: 2%;">预约整周</radio>
+        <radio value="2" >预约单节</radio>
+    </radio-group>
     <button formType="submit" class="reverse-btn">提交预约</button>
     <button class="cancel-btn" bind:tap="cancelSubmit">取消</button>
   </form>

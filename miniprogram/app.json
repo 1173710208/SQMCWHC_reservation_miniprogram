@@ -38,7 +38,5 @@
         "selectedIconPath": "images/icons/usercenter-active.png"
       }
     ]
-  },
-  "enableShareAppMessage": true, 
-  "enableShareTimeline": true
+  }
 }

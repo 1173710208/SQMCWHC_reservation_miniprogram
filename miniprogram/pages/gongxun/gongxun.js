@@ -102,7 +102,8 @@ Page({
   },
 
   formSubmit(e) {
-    const { name, tel } = e.detail.value
+    //console.log(e)
+    const { name, tel, radioValue } = e.detail.value
 
     if (!name  ) {
       wx.showToast({
@@ -118,8 +119,7 @@ Page({
       })
       return
     }
-    if(!utils.isNumeric(tel)){
-      
+    if(!utils.isNumeric(tel)){      
       wx.showToast({
         title: '手机号格式错误',
         icon: 'error'
@@ -133,7 +133,6 @@ Page({
     });
 
     const doctor = this.data.selectedDoctor;
-    const plot = this.data.selectedplot;
 
     // Get current date  
     const currentDate = new Date();
@@ -147,7 +146,39 @@ Page({
     const month = ('0' + (previousSunday.getMonth() + 1)).slice(-2); // 月份是从0开始的，需要加1
     const day = ('0' + previousSunday.getDate()).slice(-2);
     const previousSundayFormatted = year+month+day;
-    
+
+    if(radioValue=="1"){
+      for(let i = 0; i<this.data.weekdays.length; i++){
+        if(this.data.timeplots[this.data.selectedTime][i]==0){
+          let plot = this.data.selectedTime + "-" + i;
+          //console.log(plot)
+          wx.cloud.callFunction({
+            name: 'gxinsert',
+            data: { name, tel, doctor, plot, previousSundayFormatted, currentDate},
+            success: res => {
+            },
+            fail: err => {
+              wx.showToast({
+                title: '提交失败: ' + err.message,
+                icon: 'error'
+              })
+            }
+          })
+        }
+        if(i==this.data.weekdays.length-1){
+          wx.hideLoading();
+          this.setData({
+            showInputBox: false
+          });  
+          wx.showToast({
+            title: '预约成功',
+            icon: 'success'
+          })
+          this.showReservations();
+        }
+      }  
+    }else{           
+    const plot = this.data.selectedplot;
     wx.cloud.callFunction({
       name: 'gxinsert',
       data: { name, tel, doctor, plot, previousSundayFormatted, currentDate},
@@ -169,6 +200,7 @@ Page({
         })
       }
     })
+    }
   },
 
   cancelReservation(e) {
