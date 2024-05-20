@@ -15,7 +15,8 @@ Page({
     timeplots: []
   },
 
-  showReservations(){
+  // Get the appointment information from the cloud server and display it
+  showAppointments(){
     const that = this;
 
     // Get current date  
@@ -59,7 +60,8 @@ Page({
     })
   },
 
-  reserveGx: function(e) {
+  // Click on an empty time slot in the table to make an appointment
+  clickEmptyCell: function(e) {
     const plotId = e.currentTarget.id;
     let result = utils.extractStrings(plotId);
     //console.log(result)
@@ -71,7 +73,8 @@ Page({
     });
   },
 
-  bookedGx: function(e) {
+  // Click on an occupied time slot in the table to show the information of an appointment
+  clickOccupiedCell: function(e) {
     const plotId = e.currentTarget.id;
     let result = utils.extractStrings(plotId);
     //console.log(result)
@@ -83,7 +86,8 @@ Page({
     });
   },
 
-  formSubmit(e) {
+  // Submit appointment information form 
+  submitAppointment(e) {
     const { name, tel } = e.detail.value
 
     if (!name  ) {
@@ -141,7 +145,7 @@ Page({
         this.setData({
           showInputBox: false
         });
-        this.showReservations()
+        this.showAppointments()
       },
       fail: err => {
         wx.showToast({
@@ -152,7 +156,8 @@ Page({
     })
   },
 
-  cancelReservation(e) {
+  // Cancel an appointment
+  cancelAppointment(e) {
     const add =e.currentTarget.dataset.add;
     const ui = wx.getStorageSync("openId");
     //console.log(ui);
@@ -206,7 +211,7 @@ Page({
         this.setData({
           showBookedBox: false
         });
-        this.showReservations()
+        this.showAppointments()
       },
       fail: err => {
         wx.showToast({
@@ -217,18 +222,16 @@ Page({
     })
   },
 
-  cancelSubmit(){
+  // Close the appointment form window
+  closeWindow(){
     this.setData({
       showInputBox: false,
       showBookedBox: false
     });
   },
 
-  exportList(){
-
-  },
-
+  // Triggered every time the page is displayed
   onShow:function(){
-    this.showReservations();
+    this.showAppointments();
   }
 })

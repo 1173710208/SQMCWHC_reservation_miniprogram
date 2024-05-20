@@ -18,7 +18,8 @@ Page({
     timeplots: []
   },
 
-  showReservations(){
+  // Get the appointment information from the cloud server and display it
+  showAppointments(){
     const that = this;
     const doctor = this.data.selectedDoctor;
 
@@ -62,22 +63,25 @@ Page({
     })
   },
 
+  // Show drop-down box content
   toggleDropdown: function() {
     this.setData({
       dropdownVisible: !this.data.dropdownVisible
     });
   },
 
-  selectItem: function(e) {
+  // Select an item from the drop-down box
+  selectDoctor: function(e) {
     const index = e.currentTarget.dataset.index;
     this.setData({
       selectedDoctor: this.data.doctors[index],
       dropdownVisible: false
     });
-    this.showReservations();
+    this.showAppointments();
   },
 
-  reserveGx: function(e) {
+  // Click on an empty time slot in the table to make an appointment
+  clickEmptyCell: function(e) {
     const plotId = e.currentTarget.id;
     let result = utils.extractStrings(plotId);
     //console.log(result)
@@ -89,7 +93,8 @@ Page({
     });
   },
 
-  bookedGx: function(e) {
+  // Click on an occupied time slot in the table to show the information of an appointment
+  clickOccupiedCell: function(e) {
     const plotId = e.currentTarget.id;
     let result = utils.extractStrings(plotId);
     //console.log(result)
@@ -101,7 +106,8 @@ Page({
     });
   },
 
-  formSubmit(e) {
+  // Submit appointment information form 
+  submitAppointment(e) {
     //console.log(e)
     const { name, tel, radioValue } = e.detail.value
 
@@ -157,7 +163,7 @@ Page({
             data: { name, tel, doctor, plot, previousSundayFormatted, currentDate},
             success: res => { 
               if(i==this.data.weekdays.length-1){
-                this.showReservations();
+                this.showAppointments();
                 wx.hideLoading();
                 this.setData({
                   showInputBox: false
@@ -191,7 +197,7 @@ Page({
         this.setData({
           showInputBox: false
         });
-        this.showReservations()
+        this.showAppointments()
       },
       fail: err => {
         wx.showToast({
@@ -203,7 +209,8 @@ Page({
     }
   },
 
-  cancelReservation(e) {
+  // Cancel an appointment
+  cancelAppointment(e) {
     const add =e.currentTarget.dataset.add;
     const ui = wx.getStorageSync("openId");
     //console.log(ui);
@@ -258,7 +265,7 @@ Page({
         this.setData({
           showBookedBox: false
         });
-        this.showReservations()
+        this.showAppointments()
       },
       fail: err => {
         wx.showToast({
@@ -269,18 +276,16 @@ Page({
     })
   },
 
-  cancelSubmit(){
+  // Close the appointment form window
+  closeWindow(){
     this.setData({
       showInputBox: false,
       showBookedBox: false
     });
   },
 
-  exportList(){
-
-  },
-
+  // Triggered every time the page is displayed
   onShow:function(){
-    this.showReservations();
+    this.showAppointments();
   }
 })

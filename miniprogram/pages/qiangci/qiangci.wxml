@@ -20,8 +20,8 @@
         <view class="cell time-cell">{{times[parentIndex]}}</view>
         <block wx:for="{{rownum}}" wx:for-item="colnum" wx:key="index" wx:for-index="childIndex">
           <view wx:if="{{parentIndex > 10 && childIndex==5}}" class="disabled-cell"  id="{{parentIndex}}-{{childIndex}}" ></view>
-          <view wx:elif="{{colnum === 0}}" class="cell"  id="{{parentIndex}}-{{childIndex}}"  bindtap="reserveGx"></view>
-          <view wx:else class="occupied-cell"  id="{{parentIndex}}-{{childIndex}}"  bindtap="bookedGx">{{colnum.name}}</view>
+          <view wx:elif="{{colnum === 0}}" class="cell"  id="{{parentIndex}}-{{childIndex}}"  bindtap="clickEmptyCell"></view>
+          <view wx:else class="occupied-cell"  id="{{parentIndex}}-{{childIndex}}"  bindtap="clickOccupiedCell">{{colnum.name}}</view>
         </block>
       </view>
     </block>
@@ -32,11 +32,11 @@
 <view class="input-info">
   <view>{{weekdays[selectedWeekday]}} {{times[selectedTime]}} </view>
 </view>
-  <form bindsubmit="formSubmit">
+  <form bindsubmit="submitAppointment">
     <input type="text" placeholder="输入名字" id="name" name="name"/>
     <input type="text" placeholder="输入手机号" id="tel" name="tel"/>
     <button formType="submit" class="reverse-btn">提交预约</button>
-    <button class="cancel-btn" bind:tap="cancelSubmit">取消</button>
+    <button class="cancel-btn" bind:tap="closeWindow">取消</button>
   </form>
 </view>
 
@@ -46,9 +46,9 @@
   <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].name}}</view>
   <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].tel}}</view>
 </view>
-  <form bindsubmit="cancelReservation">
+  <form bindsubmit="cancelAppointment">
     <button formType="submit" class="cancelBook-btn">取消预约</button>
-    <button class="cancel-btn" bind:tap="cancelSubmit">取消</button>
+    <button class="cancel-btn" bind:tap="closeWindow">取消</button>
   </form>
 </view>
 
