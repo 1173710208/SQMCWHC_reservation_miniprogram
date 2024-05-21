@@ -6,7 +6,7 @@ Page({
     dropdownVisible: false,
     selectedDoctor: 0,
     doctors: ['邢亚敏','王圆圆', '李亚楠', '陈丹','陈娜','杨慧','曹文','赵艳','马敏','高舒','李从军'],
-    onHoliday:[0,0,0,0,0,0,0,0,0,0,0],
+    onHoliday:[],
     selectedplot:'',
     selectedTime:'',
     times: ['8:10','8:50','9:30','10:10','10:50','11:30','2:40','3:20','4:00','4:40'],
@@ -21,55 +21,74 @@ Page({
 
   // Get the appointment information from the cloud server and display it
   showAppointments(){
-    if(this.data.onHoliday[this.data.selectedDoctor]==1){
-      let plot_arr = Array.from({ length: this.data.times.length }, () => Array.from({ length: this.data.weekdays.length }, () => 1))
-      this.setData({
-        timeplots: plot_arr
-      })
-      return
-    }else {
-      const that = this;
-      const doctor = this.data.doctors[this.data.selectedDoctor];
-  
-      // Get current date  
-      const currentDate = new Date();
-      // Get current week day, Sunday is 0
-      const currentDay = currentDate.getDay();
-      // Calculate the date of the previous Sunday
-      const previousSunday = new Date(currentDate);
-      previousSunday.setDate(currentDate.getDate() - currentDay);
-      // Format date as YYYY-MM-DD
-      const year = previousSunday.getFullYear();
-      const month = ('0' + (previousSunday.getMonth() + 1)).slice(-2); // 月份是从0开始的，需要加1
-      const day = ('0' + previousSunday.getDate()).slice(-2);
-      const weekIdentifier = year+month+day;
-  
-      wx.cloud.callFunction({
-        name: "gxread",
-        data:{doctor, weekIdentifier},
-        success:res=>{
-          that.setData({
-            logs:res.result.data,
-            logsLength:res.result.data.length,
-            timeplots: []
-          })
-          //console.log(that.data.logs)
-          //Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
-          let plot_arr = Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
-          for (let i = that.data.logsLength-1; i >= 0 ; i--) {
-            let plotId = that.data.logs[i].plot;
-            let result = utils.extractStrings(plotId);
-            //console.log(result)
-            plot_arr[result.before][result.after]=that.data.logs[i];
-          }
-          that.setData({
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    });
+    const identifier = "onHoliday"
+    wx.cloud.callFunction({
+      name: "getHoliday",
+      data:{identifier},
+      success:res=>{
+        //console.log(res)
+        this.setData({
+          onHoliday:res.result.data[0].onHoliday,
+        })
+        //console.log(this.data.onHoliday)
+        if(this.data.onHoliday[this.data.selectedDoctor]==1){
+          let plot_arr = Array.from({ length: this.data.times.length }, () => Array.from({ length: this.data.weekdays.length }, () => 1))
+          this.setData({
             timeplots: plot_arr
           })
-          //console.log(that.data.timeplots)
-        },
-        fail:res =>{console.log("res", res)}
-      })
-    }
+          wx.hideLoading();
+          return
+        }else {
+          const that = this;
+          const doctor = this.data.doctors[this.data.selectedDoctor];
+      
+          // Get current date  
+          const currentDate = new Date();
+          // Get current week day, Sunday is 0
+          const currentDay = currentDate.getDay();
+          // Calculate the date of the previous Sunday
+          const previousSunday = new Date(currentDate);
+          previousSunday.setDate(currentDate.getDate() - currentDay);
+          // Format date as YYYY-MM-DD
+          const year = previousSunday.getFullYear();
+          const month = ('0' + (previousSunday.getMonth() + 1)).slice(-2); // 月份是从0开始的，需要加1
+          const day = ('0' + previousSunday.getDate()).slice(-2);
+          const weekIdentifier = year+month+day;
+      
+          wx.cloud.callFunction({
+            name: "gxread",
+            data:{doctor, weekIdentifier},
+            success:res=>{
+              that.setData({
+                logs:res.result.data,
+                logsLength:res.result.data.length,
+                timeplots: []
+              })
+              //console.log(that.data.logs)
+              //Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
+              let plot_arr = Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
+              for (let i = that.data.logsLength-1; i >= 0 ; i--) {
+                let plotId = that.data.logs[i].plot;
+                let result = utils.extractStrings(plotId);
+                //console.log(result)
+                plot_arr[result.before][result.after]=that.data.logs[i];
+              }
+              that.setData({
+                timeplots: plot_arr
+              })
+              wx.hideLoading();
+              //console.log(that.data.timeplots)
+            },
+            fail:res =>{console.log("res", res)}
+          })
+        }
+      },
+      fail:res =>{console.log("res", res)}
+    })    
   },
 
   // Show drop-down box content
@@ -315,16 +334,34 @@ Page({
       return
     }
     
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    });
     const temponHoliday = this.data.onHoliday
+    const identifier = "onHoliday"
     if(temponHoliday[this.data.selectedDoctor]==1){
       temponHoliday[this.data.selectedDoctor] = 0;
     } else{
       temponHoliday[this.data.selectedDoctor] = 1;
     }    
-    this.setData({
-      onHoliday: temponHoliday
-    });
-    this.showAppointments();
+    //console.log(temponHoliday)
+
+    wx.cloud.callFunction({
+      name: 'updateHoliday',
+      data: { identifier, temponHoliday },
+      success: res => { 
+        //console.log(res)
+        wx.hideLoading();
+        this.showAppointments();
+      },
+      fail: err => {
+        wx.showToast({
+          title: '提交失败: ' + err.message,
+          icon: 'error'
+        })
+      }
+    })
   },
 
   // Triggered every time the page is displayed

@@ -10,7 +10,7 @@
 
 <view class="schedule-container">
   <view class="schedule-header">
-    <text>功训预约单</text>
+    <text>约课预约单</text>
   <view wx:if="{{!onHoliday[selectedDoctor]}}" class="onduty-btn" bindtap="switchAvailability" >上班</view>
   <view wx:if="{{onHoliday[selectedDoctor]}}" class="offduty-btn" bindtap="switchAvailability" >休假</view>
   <!-- <view class="export-btn" bindinput="exportList">导出预约单</view> -->
