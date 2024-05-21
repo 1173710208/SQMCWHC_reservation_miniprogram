@@ -171,7 +171,7 @@ Page({
       })
       return
     }
-    if (ui != 'o5IR-5bwhJFeCNUBUt_oKb8dLjmU' && ui != '05IR-5WVjJVWK0y4-Umbu28sqR_w') {
+    if (ui != 'o5IR-5bwhJFeCNUBUt_oKb8dLjmU' && ui != 'o5IR-5WVjJVWK0y4-Umbu28sqR_w') {
       wx.showToast({
         title: '您无权限！',
         icon: 'error'
