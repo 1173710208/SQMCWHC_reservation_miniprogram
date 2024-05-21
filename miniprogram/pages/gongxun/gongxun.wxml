@@ -1,6 +1,6 @@
 <!--pages/gongxun/gongxun.wxml-->
 <view class="dropdown-container">
-  <button class="dropdown-button" bindtap="toggleDropdown">{{selectedDoctor}}</button>
+  <button class="dropdown-button" bindtap="toggleDropdown">{{doctors[selectedDoctor]}}</button>
   <view class="dropdown-menu" wx:if="{{dropdownVisible}}">
     <block wx:for="{{doctors}}" wx:key="index">
       <view class="dropdown-item" bindtap="selectDoctor" data-index="{{index}}">{{item}}</view>
@@ -11,6 +11,8 @@
 <view class="schedule-container">
   <view class="schedule-header">
     <text>功训预约单</text>
+  <view wx:if="{{!onHoliday[selectedDoctor]}}" class="onduty-btn" bindtap="switchAvailability" >上班</view>
+  <view wx:if="{{onHoliday[selectedDoctor]}}" class="offduty-btn" bindtap="switchAvailability" >休假</view>
   <!-- <view class="export-btn" bindinput="exportList">导出预约单</view> -->
   </view>
   <view class="schedule-table">
@@ -30,6 +32,7 @@
         <block wx:for="{{rownum}}" wx:for-item="colnum" wx:key="index" wx:for-index="childIndex">
           <view wx:if="{{parentIndex > 5 && childIndex==5}}" class="disabled-cell"  id="{{parentIndex}}-{{childIndex}}" ></view>
           <view wx:elif="{{colnum === 0}}" class="cell"  id="{{parentIndex}}-{{childIndex}}"  bindtap="clickEmptyCell"></view>
+          <view wx:elif="{{colnum === 1}}" class="occupied-cell"  id="{{parentIndex}}-{{childIndex}}" >不可约</view>
           <view wx:else class="occupied-cell"  id="{{parentIndex}}-{{childIndex}}"  bindtap="clickOccupiedCell">{{colnum.name}}</view>
         </block>
       </view>
@@ -39,7 +42,7 @@
 
 <view wx:if="{{showInputBox}}" class="input-container">
 <view class="input-info">
-  <view>{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{selectedDoctor}}</view>
+  <view>{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{doctors[selectedDoctor]}}</view>
 </view>
   <form bindsubmit="submitAppointment">
     <input type="text" placeholder="输入名字" id="name" name="name"/>
@@ -55,7 +58,7 @@
 
 <view wx:if="{{showBookedBox}}" class="input-container">
 <view class="input-info">
-  <view class="h_center">{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{selectedDoctor}}</view>
+  <view class="h_center">{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{doctors[selectedDoctor]}}</view>
   <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].name}}</view>
   <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].tel}}</view>
 </view>

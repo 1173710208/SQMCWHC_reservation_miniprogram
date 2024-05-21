@@ -179,7 +179,7 @@ input {
   border-radius: 5px;
 }
 
-.export-btn {
+.onduty-btn {
   font-size: 12px;
   position:absolute;
   top: 50%;
@@ -187,6 +187,18 @@ input {
   transform: translateY(-50%);
   color: #fff;
   background-color: #00c553;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.offduty-btn {
+  font-size: 12px;
+  position:absolute;
+  top: 50%;
+  right: 1%;
+  transform: translateY(-50%);
+  color: #fff;
+  background-color: #c55300;
   padding: 5px;
   border-radius: 5px;
 }

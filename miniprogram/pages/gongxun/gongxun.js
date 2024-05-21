@@ -4,8 +4,9 @@ const utils = require('../../utils/utils.js');
 Page({
   data: {
     dropdownVisible: false,
-    selectedDoctor: '邢亚敏',
+    selectedDoctor: 0,
     doctors: ['邢亚敏','王圆圆', '李亚楠', '陈丹','陈娜','杨慧','曹文','赵艳','马敏','高舒','李从军'],
+    onHoliday:[0,0,0,0,0,0,0,0,0,0,0],
     selectedplot:'',
     selectedTime:'',
     times: ['8:10','8:50','9:30','10:10','10:50','11:30','2:40','3:20','4:00','4:40'],
@@ -20,47 +21,55 @@ Page({
 
   // Get the appointment information from the cloud server and display it
   showAppointments(){
-    const that = this;
-    const doctor = this.data.selectedDoctor;
-
-    // Get current date  
-    const currentDate = new Date();
-    // Get current week day, Sunday is 0
-    const currentDay = currentDate.getDay();
-    // Calculate the date of the previous Sunday
-    const previousSunday = new Date(currentDate);
-    previousSunday.setDate(currentDate.getDate() - currentDay);
-    // Format date as YYYY-MM-DD
-    const year = previousSunday.getFullYear();
-    const month = ('0' + (previousSunday.getMonth() + 1)).slice(-2); // 月份是从0开始的，需要加1
-    const day = ('0' + previousSunday.getDate()).slice(-2);
-    const weekIdentifier = year+month+day;
-
-    wx.cloud.callFunction({
-      name: "gxread",
-      data:{doctor, weekIdentifier},
-      success:res=>{
-        that.setData({
-          logs:res.result.data,
-          logsLength:res.result.data.length,
-          timeplots: []
-        })
-        //console.log(that.data.logs)
-        Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
-        let plot_arr = Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
-        for (let i = that.data.logsLength-1; i >= 0 ; i--) {
-          let plotId = that.data.logs[i].plot;
-          let result = utils.extractStrings(plotId);
-          //console.log(result)
-          plot_arr[result.before][result.after]=that.data.logs[i];
-        }
-        that.setData({
-          timeplots: plot_arr
-        })
-        //console.log(that.data.timeplots)
-      },
-      fail:res =>{console.log("res", res)}
-    })
+    if(this.data.onHoliday[this.data.selectedDoctor]==1){
+      let plot_arr = Array.from({ length: this.data.times.length }, () => Array.from({ length: this.data.weekdays.length }, () => 1))
+      this.setData({
+        timeplots: plot_arr
+      })
+      return
+    }else {
+      const that = this;
+      const doctor = this.data.doctors[this.data.selectedDoctor];
+  
+      // Get current date  
+      const currentDate = new Date();
+      // Get current week day, Sunday is 0
+      const currentDay = currentDate.getDay();
+      // Calculate the date of the previous Sunday
+      const previousSunday = new Date(currentDate);
+      previousSunday.setDate(currentDate.getDate() - currentDay);
+      // Format date as YYYY-MM-DD
+      const year = previousSunday.getFullYear();
+      const month = ('0' + (previousSunday.getMonth() + 1)).slice(-2); // 月份是从0开始的，需要加1
+      const day = ('0' + previousSunday.getDate()).slice(-2);
+      const weekIdentifier = year+month+day;
+  
+      wx.cloud.callFunction({
+        name: "gxread",
+        data:{doctor, weekIdentifier},
+        success:res=>{
+          that.setData({
+            logs:res.result.data,
+            logsLength:res.result.data.length,
+            timeplots: []
+          })
+          //console.log(that.data.logs)
+          //Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
+          let plot_arr = Array.from({ length: that.data.times.length }, () => Array.from({ length: that.data.weekdays.length }, () => 0))
+          for (let i = that.data.logsLength-1; i >= 0 ; i--) {
+            let plotId = that.data.logs[i].plot;
+            let result = utils.extractStrings(plotId);
+            //console.log(result)
+            plot_arr[result.before][result.after]=that.data.logs[i];
+          }
+          that.setData({
+            timeplots: plot_arr
+          })
+          //console.log(that.data.timeplots)
+        },
+        fail:res =>{console.log("res", res)}
+      })
+    }
   },
 
   // Show drop-down box content
@@ -74,7 +83,7 @@ Page({
   selectDoctor: function(e) {
     const index = e.currentTarget.dataset.index;
     this.setData({
-      selectedDoctor: this.data.doctors[index],
+      selectedDoctor: index,
       dropdownVisible: false
     });
     this.showAppointments();
@@ -138,7 +147,7 @@ Page({
       mask: true
     });
 
-    const doctor = this.data.selectedDoctor;
+    const doctor = this.data.doctors[this.data.selectedDoctor];
 
     // Get current date  
     const currentDate = new Date();
@@ -237,7 +246,7 @@ Page({
       mask: true
     });
 
-    const doctor = this.data.selectedDoctor;
+    const doctor = this.data.doctors[this.data.selectedDoctor];
     const plot = this.data.selectedplot;
 
     // Get current date  
@@ -282,6 +291,40 @@ Page({
       showInputBox: false,
       showBookedBox: false
     });
+  },
+
+  // Switch doctors' availability this week
+  switchAvailability(){
+    const ui = wx.getStorageSync("openId");
+    //console.log(ui);
+    if(!ui){
+      wx.showToast({
+        title: '请先登录！',
+        icon: 'error'
+      })
+      wx.switchTab({
+       url:"/pages/user-center/index",
+      })
+      return
+    }
+    if (ui != 'o5IR-5bwhJFeCNUBUt_oKb8dLjmU' && ui != 'o5IR-5WVjJVWK0y4-Umbu28sqR_w') {
+      wx.showToast({
+        title: '您无权限！',
+        icon: 'error'
+      })
+      return
+    }
+    
+    const temponHoliday = this.data.onHoliday
+    if(temponHoliday[this.data.selectedDoctor]==1){
+      temponHoliday[this.data.selectedDoctor] = 0;
+    } else{
+      temponHoliday[this.data.selectedDoctor] = 1;
+    }    
+    this.setData({
+      onHoliday: temponHoliday
+    });
+    this.showAppointments();
   },
 
   // Triggered every time the page is displayed
