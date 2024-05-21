@@ -11,7 +11,7 @@
   <h3 align="center">SQMCWHC Appointment Wechat Mini Program</h3>
 
   <p align="center">
-    Scan the QR code with Wechat app to view demo!
+    Scan the QR code with WeChat app to view demo!
   </p>
 </div>
 
@@ -30,14 +30,9 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -47,7 +42,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a wechat mini-program for patients in Shangqiu Maternal and Child Welfare Health Center (SQMCWHC) to book check-ups and physiotherapy.
+This is a WeChat mini-program for patients in Shangqiu Maternal and Child Welfare Health Center (SQMCWHC) to book check-ups and physiotherapy.
 
 ### Built With
 
@@ -59,7 +54,7 @@ This is a wechat mini-program for patients in Shangqiu Maternal and Child Welfar
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This sections shows how you may set up this project locally.
+This section shows how you may set up this project locally.
 To get a local copy up and running follow these simple steps.
 
 ### Installation
