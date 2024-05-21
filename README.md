@@ -61,7 +61,7 @@ To get a local copy up and running follow these simple steps.
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Go to the [Mini Program Registration page](https://mp.weixin.qq.com/wxopen/waregister?action=step1), and enter and submit the required information as instructed to get your Mini Program account.
+1. Go to the [Mini Program Registration page](https://mp.weixin.qq.com/wxopen/waregister?action=step1&source=mpregister&token=), and enter and submit the required information as instructed to get your Mini Program account.
 2. Log in to [Mini Program Console](https://mp.weixin.qq.com/), go to **Settings** > **Development** **Settings** to find the **AppID** of the Mini Program.
 3. Go to the [Weixin DevTools download page](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html) to download the installer package based on your OS. For more information on Weixin DevTools, see [Introduction to Weixin DevTools](https://developers.weixin.qq.com/miniprogram/en/dev/devtools/devtools.html). Log in to the Weixin DevTools by scanning the QR code with Weixin.
 
