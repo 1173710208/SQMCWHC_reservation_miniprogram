@@ -146,20 +146,20 @@ Page({
       })
       return
     }
-    if(!tel){
-      wx.showToast({
-        title: '请输入手机号！',
-        icon: 'error'
-      })
-      return
-    }
-    if(!utils.isNumeric(tel)){      
-      wx.showToast({
-        title: '手机号格式错误',
-        icon: 'error'
-      })
-      return
-    }
+    // if(!tel){
+    //   wx.showToast({
+    //     title: '请输入手机号！',
+    //     icon: 'error'
+    //   })
+    //   return
+    // }
+    // if(!utils.isNumeric(tel)){      
+    //   wx.showToast({
+    //     title: '手机号格式错误',
+    //     icon: 'error'
+    //   })
+    //   return
+    // }
 
     wx.showLoading({
       title: '预约中...',
@@ -188,7 +188,7 @@ Page({
           //console.log(plot)
           wx.cloud.callFunction({
             name: 'gxinsert',
-            data: { name, tel, doctor, plot, previousSundayFormatted, currentDate},
+            data: { name, doctor, plot, previousSundayFormatted, currentDate},
             success: res => { 
               if(i==this.data.weekdays.length-1){
                 this.showAppointments();
@@ -215,7 +215,7 @@ Page({
     const plot = this.data.selectedplot;
     wx.cloud.callFunction({
       name: 'gxinsert',
-      data: { name, tel, doctor, plot, previousSundayFormatted, currentDate},
+      data: { name, doctor, plot, previousSundayFormatted, currentDate},
       success: res => {
         wx.hideLoading();
         wx.showToast({

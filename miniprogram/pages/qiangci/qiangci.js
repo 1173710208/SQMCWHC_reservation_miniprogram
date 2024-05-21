@@ -88,7 +88,7 @@ Page({
 
   // Submit appointment information form 
   submitAppointment(e) {
-    const { name, tel } = e.detail.value
+    const { name} = e.detail.value
 
     if (!name  ) {
       wx.showToast({
@@ -97,21 +97,21 @@ Page({
       })
       return
     }
-    if(!tel){
-      wx.showToast({
-        title: '请输入手机号！',
-        icon: 'error'
-      })
-      return
-    }
-    if(!utils.isNumeric(tel)){
+    // if(!tel){
+    //   wx.showToast({
+    //     title: '请输入手机号！',
+    //     icon: 'error'
+    //   })
+    //   return
+    // }
+    // if(!utils.isNumeric(tel)){
       
-      wx.showToast({
-        title: '手机号格式错误',
-        icon: 'error'
-      })
-      return
-    }
+    //   wx.showToast({
+    //     title: '手机号格式错误',
+    //     icon: 'error'
+    //   })
+    //   return
+    // }
 
     wx.showLoading({
       title: '预约中...',
@@ -135,7 +135,7 @@ Page({
     
     wx.cloud.callFunction({
       name: 'qcinsert',
-      data: { name, tel, plot, previousSundayFormatted, currentDate},
+      data: { name, plot, previousSundayFormatted, currentDate},
       success: res => {
         wx.hideLoading();
         wx.showToast({

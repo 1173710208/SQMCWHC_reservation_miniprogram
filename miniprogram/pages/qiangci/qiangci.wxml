@@ -34,7 +34,7 @@
 </view>
   <form bindsubmit="submitAppointment">
     <input type="text" placeholder="输入名字" id="name" name="name"/>
-    <input type="text" placeholder="输入手机号" id="tel" name="tel"/>
+    <!-- <input type="text" placeholder="输入手机号" id="tel" name="tel"/> -->
     <button formType="submit" class="reverse-btn">提交预约</button>
     <button class="cancel-btn" bind:tap="closeWindow">取消</button>
   </form>
@@ -44,7 +44,7 @@
 <view class="input-info">
   <view class="h_center">{{weekdays[selectedWeekday]}} {{times[selectedTime]}} </view>
   <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].name}}</view>
-  <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].tel}}</view>
+  <!-- <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].tel}}</view> -->
 </view>
   <form bindsubmit="cancelAppointment">
     <button formType="submit" class="cancelBook-btn">取消预约</button>

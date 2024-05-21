@@ -46,7 +46,7 @@
 </view>
   <form bindsubmit="submitAppointment">
     <input type="text" placeholder="输入名字" id="name" name="name"/>
-    <input type="text" placeholder="输入手机号" id="tel" name="tel"/>
+    <!-- <input type="text" placeholder="输入手机号" id="tel" name="tel"/> -->
     <radio-group name="radioValue" bindchange="radioChange" style="margin-bottom: 10%;">
         <radio value="1" checked="true" style="margin-bottom: 2%;">预约整周</radio>
         <radio value="2" >预约单节</radio>
@@ -60,7 +60,7 @@
 <view class="input-info">
   <view class="h_center">{{weekdays[selectedWeekday]}} {{times[selectedTime]}} {{doctors[selectedDoctor]}}</view>
   <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].name}}</view>
-  <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].tel}}</view>
+  <!-- <view class="h_center margin_10v">{{timeplots[selectedTime][selectedWeekday].tel}}</view> -->
 </view>
   <form bindsubmit="cancelAppointment">
     <button formType="submit" class="cancelBook-btn">取消预约</button>

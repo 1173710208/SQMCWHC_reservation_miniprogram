@@ -5,7 +5,7 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { name, tel, plot, previousSundayFormatted, currentDate} = event
+  const { name, plot, previousSundayFormatted, currentDate} = event
   const db = cloud.database()
   const collection = db.collection('qiangci')
 
@@ -13,7 +13,6 @@ exports.main = async (event, context) => {
     return await db.collection('qiangci').add({
       data:{
         name: name,
-        tel: tel,
         plot: plot,
         weekIdentifier: previousSundayFormatted,
         submitdate: currentDate
